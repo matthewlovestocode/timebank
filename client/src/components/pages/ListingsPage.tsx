@@ -12,5 +12,12 @@ export function ListingsPage({ navigation }: { navigation: ReactNode }) {
   const { listings, reload } = useMyListings(clientConfig.apiUrl)
   const { createListing, status } = useMarketplaceActions(clientConfig.apiUrl)
   const create = async (input: Parameters<typeof createListing>[0]) => { const result = await createListing(input); if (result) await reload(); return result }
-  return <PageLayout navigation={navigation}><Box sx={{ p: { xs: 3, sm: 6 } }}><ListingManager categories={categories} listings={listings} onCreate={create} />{status && <Typography sx={{ mt: 2 }}>{status}</Typography>}</Box></PageLayout>
+  return (
+    <PageLayout navigation={navigation}>
+      <Box sx={{ p: { xs: 3, sm: 6 } }}>
+        <ListingManager categories={categories} listings={listings} onCreate={create} />
+        {status && <Typography sx={{ mt: 2 }}>{status}</Typography>}
+      </Box>
+    </PageLayout>
+  )
 }

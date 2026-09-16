@@ -7,5 +7,11 @@ import { useLedger } from '../../hooks/useLedger'
 
 export function LedgerPage({ navigation }: { navigation: ReactNode }) {
   const { entries } = useLedger(clientConfig.apiUrl)
-  return <PageLayout navigation={navigation}><Box sx={{ p: { xs: 3, sm: 6 } }}><LedgerHistory entries={entries} /></Box></PageLayout>
+  return (
+    <PageLayout navigation={navigation}>
+      <Box sx={{ p: { xs: 3, sm: 6 } }}>
+        <LedgerHistory entries={entries} />
+      </Box>
+    </PageLayout>
+  )
 }
