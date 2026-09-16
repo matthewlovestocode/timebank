@@ -26,6 +26,7 @@ describe('Ledger', () => {
           direction: 'credit',
           kind: 'account-creation-deposit',
           minutes: 1200,
+          exchangeId: null,
           createdAt: '2026-01-01T00:00:00.000Z',
         },
         {
@@ -34,6 +35,7 @@ describe('Ledger', () => {
           direction: 'debit',
           kind: 'account-creation-deposit',
           minutes: 90,
+          exchangeId: null,
           createdAt: '2026-01-02T00:00:00.000Z',
         },
       ]),
