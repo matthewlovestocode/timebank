@@ -1,0 +1,8 @@
+[
+  { "id": "a1000000-0000-4000-8000-000000000001", "name": "Home & garden", "appliesTo": ["item", "service"], "createdAt": "2026-01-01T00:00:00.000Z" },
+  { "id": "a1000000-0000-4000-8000-000000000002", "name": "Learning & mentoring", "appliesTo": ["service"], "createdAt": "2026-01-01T00:00:00.000Z" },
+  { "id": "a1000000-0000-4000-8000-000000000003", "name": "Creative & repair", "appliesTo": ["item", "service"], "createdAt": "2026-01-01T00:00:00.000Z" },
+  { "id": "a1000000-0000-4000-8000-000000000004", "name": "Food & sharing", "appliesTo": ["item", "service"], "createdAt": "2026-01-01T00:00:00.000Z" },
+  { "id": "a1000000-0000-4000-8000-000000000005", "name": "Care & companionship", "appliesTo": ["service"], "createdAt": "2026-01-01T00:00:00.000Z" },
+  { "id": "a1000000-0000-4000-8000-000000000006", "name": "Tools & household", "appliesTo": ["item"], "createdAt": "2026-01-01T00:00:00.000Z" }
+]

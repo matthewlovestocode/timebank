@@ -70,6 +70,12 @@ export function TopNavigation({ user, onSignOut }: TopNavigationProps) {
               </Typography>
             </Box>
             <MenuItem onClick={() => navigate('/dashboard')}>Dashboard</MenuItem>
+            <MenuItem onClick={() => navigate('/profile')}>Profile</MenuItem>
+            <MenuItem onClick={() => navigate('/listings')}>My listings</MenuItem>
+            <MenuItem onClick={() => navigate('/exchanges')}>My exchanges</MenuItem>
+            <MenuItem onClick={() => navigate('/ledger')}>Ledger</MenuItem>
+            {user.role === 'admin' && <MenuItem onClick={() => navigate('/admin/categories')}>Categories</MenuItem>}
+            {user.role === 'admin' && <MenuItem onClick={() => navigate('/admin/members')}>Members</MenuItem>}
             <MenuItem onClick={signOut}>Sign out</MenuItem>
           </Menu>
         </>

@@ -34,9 +34,11 @@ export function SignInPage({ authenticated, status, navigation, onSignIn }: Sign
             Welcome back
           </Typography>
           <SignInForm authenticated={authenticated} onSignIn={signIn} />
-          <Typography variant="body2" color="text.secondary">
-            {status}
-          </Typography>
+          {status !== 'Not signed in' && (
+            <Typography variant="body2" color="text.secondary">
+              {status}
+            </Typography>
+          )}
           <ActionButton variant="text" onClick={() => navigate('/sign-up')}>
             Need an account? Sign up
           </ActionButton>

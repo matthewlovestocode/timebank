@@ -97,6 +97,24 @@ describe('authentication routes', () => {
     expect(dashboard.status).toBe(200)
     expect(dashboard.body.balanceMinutes).toBe(1200)
     expect(DashboardResponseContract.parse(dashboard.body)).toEqual(dashboard.body)
+
+    const users = await request(persistentAuthApp)
+      .get('/api/auth/users')
+      .set('Authorization', `Bearer ${signIn.body.token}`)
+    expect(users.status).toBe(200)
+    expect(users.body.users[0]).not.toHaveProperty('passwordHash')
+
+    const profile = await request(persistentAuthApp)
+      .patch('/api/auth/me')
+      .set('Authorization', `Bearer ${signIn.body.token}`)
+      .send({ name: 'Ada Byron', bio: 'Mathematician and neighbor.', location: 'London' })
+    expect(profile.status).toBe(200)
+    expect(profile.body.user).toMatchObject({ name: 'Ada Byron', bio: 'Mathematician and neighbor.', location: 'London' })
+
+    const refreshedUser = await request(persistentAuthApp)
+      .get('/api/auth/me')
+      .set('Authorization', `Bearer ${signIn.body.token}`)
+    expect(refreshedUser.body.user.name).toBe('Ada Byron')
   })
 
   it('validates sign-in payloads at the route boundary', async () => {
@@ -118,6 +136,17 @@ describe('authentication routes', () => {
     expect(response.body).toEqual({ error: 'A user name is required' })
   })
 
+  it('validates profile payloads at the route boundary', async () => {
+    const signIn = await request(app).post('/api/auth/quick-sign-in/member')
+    const response = await request(app)
+      .patch('/api/auth/me')
+      .set('Authorization', `Bearer ${signIn.body.token}`)
+      .send({ name: '', bio: 'Valid', location: 'Somewhere' })
+
+    expect(response.status).toBe(400)
+    expect(response.body).toEqual({ error: 'A user name is required' })
+  })
+
   it('rejects requests without a valid bearer token', async () => {
     const response = await request(app)
       .get('/api/auth/me')
@@ -129,6 +158,9 @@ describe('authentication routes', () => {
 
     const dashboard = await request(app).get('/api/auth/dashboard')
     expect(dashboard.status).toBe(401)
+
+    const ledger = await request(app).get('/api/auth/ledger')
+    expect(ledger.status).toBe(401)
   })
 
   it('creates a demo admin session', async () => {

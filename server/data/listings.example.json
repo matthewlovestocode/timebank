@@ -1,0 +1,50 @@
+[
+  {
+    "id": "b1000000-0000-4000-8000-000000000001",
+    "ownerId": "d1c91af6-6ba7-46d2-a8a6-1556eaccc8e6",
+    "categoryId": "a1000000-0000-4000-8000-000000000002",
+    "kind": "service",
+    "title": "Patient computer help",
+    "description": "I can help set up a new phone, organize photos, or learn a video-call app.",
+    "creditMinutes": 60,
+    "status": "active",
+    "createdAt": "2026-01-02T10:00:00.000Z",
+    "updatedAt": "2026-01-02T10:00:00.000Z"
+  },
+  {
+    "id": "b1000000-0000-4000-8000-000000000002",
+    "ownerId": "d1c91af6-6ba7-46d2-a8a6-1556eaccc8e6",
+    "categoryId": "a1000000-0000-4000-8000-000000000001",
+    "kind": "item",
+    "title": "Pruning shears to lend",
+    "description": "Clean, sharp hand pruners available for a weekend project.",
+    "creditMinutes": null,
+    "status": "active",
+    "createdAt": "2026-01-03T10:00:00.000Z",
+    "updatedAt": "2026-01-03T10:00:00.000Z"
+  },
+  {
+    "id": "b1000000-0000-4000-8000-000000000003",
+    "ownerId": "d1c91af6-6ba7-46d2-a8a6-1556eaccc8e6",
+    "categoryId": "a1000000-0000-4000-8000-000000000003",
+    "kind": "service",
+    "title": "Mend a loose button or small seam",
+    "description": "Bring a garment and I will do a simple hand repair while we chat.",
+    "creditMinutes": 30,
+    "status": "active",
+    "createdAt": "2026-01-04T10:00:00.000Z",
+    "updatedAt": "2026-01-04T10:00:00.000Z"
+  },
+  {
+    "id": "b1000000-0000-4000-8000-000000000004",
+    "ownerId": "d1c91af6-6ba7-46d2-a8a6-1556eaccc8e6",
+    "categoryId": "a1000000-0000-4000-8000-000000000004",
+    "kind": "item",
+    "title": "Starter herbs from my windowsill",
+    "description": "A few rooted basil or mint cuttings for a neighbor who will use them.",
+    "creditMinutes": null,
+    "status": "active",
+    "createdAt": "2026-01-05T10:00:00.000Z",
+    "updatedAt": "2026-01-05T10:00:00.000Z"
+  }
+]

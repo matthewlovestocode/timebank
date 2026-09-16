@@ -8,6 +8,8 @@ export type AuthUser = {
   updatedAt: string
   joinedAt: string
   role: 'member' | 'admin'
+  bio: string
+  location: string
 }
 
 export type SignUpInput = {
@@ -20,6 +22,12 @@ export type SignUpInput = {
 export type SignInInput = {
   email: string
   password: string
+}
+
+export type ProfileInput = {
+  name: string
+  bio: string
+  location: string
 }
 
 export function useDemoAuth(apiUrl: string) {
@@ -101,5 +109,29 @@ export function useDemoAuth(apiUrl: string) {
     }
   }
 
-  return { signIn, signOut, signUp, status, user }
+  const updateProfile = async (input: ProfileInput) => {
+    const token = localStorage.getItem('timebank.authToken')
+    if (!token) {
+      setStatus('Please sign in to update your profile')
+      return false
+    }
+    setStatus('Saving profile…')
+    try {
+      const response = await fetch(`${apiUrl}/auth/me`, {
+        method: 'PATCH',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(input),
+      })
+      if (!response.ok) throw new Error('Could not save profile')
+      const { user: updatedUser } = (await response.json()) as { user: AuthUser }
+      setUser(updatedUser)
+      setStatus('Profile saved')
+      return true
+    } catch {
+      setStatus('Could not save profile')
+      return false
+    }
+  }
+
+  return { signIn, signOut, signUp, updateProfile, status, user }
 }

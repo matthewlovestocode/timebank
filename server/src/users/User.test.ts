@@ -15,6 +15,18 @@ describe('User', () => {
     expect(user.updatedAt).toBe(user.createdAt)
     expect(user.joinedAt).toBe(user.createdAt)
     expect(user.role).toBe('member')
+    expect(user.bio).toBe('')
+    expect(user.location).toBe('')
+  })
+
+  it('updates profile details and refreshes the updated timestamp', () => {
+    const user = new User({
+      id: '8e9b734e-8125-43f3-8f8c-3a2094e1ced9', name: 'Ada', email: 'ada@example.com',
+      createdAt: '2026-09-16T00:00:00.000Z', updatedAt: '2026-09-16T00:00:00.000Z', joinedAt: '2026-09-16T00:00:00.000Z', role: 'member', bio: '', location: '',
+    })
+    const updated = user.updateProfile({ name: 'Ada Lovelace', bio: 'Mathematician', location: 'London' })
+    expect(updated.toJSON()).toMatchObject({ name: 'Ada Lovelace', bio: 'Mathematician', location: 'London' })
+    expect(updated.updatedAt).not.toBe(user.updatedAt)
   })
 
   it('serializes to plain JSON data', () => {
@@ -26,6 +38,8 @@ describe('User', () => {
       updatedAt: '2026-09-16T00:00:00.000Z',
       joinedAt: '2026-09-16T00:00:00.000Z',
       role: 'admin',
+      bio: '',
+      location: '',
     })
 
     expect(user.toJSON()).toEqual({
@@ -36,6 +50,8 @@ describe('User', () => {
       updatedAt: '2026-09-16T00:00:00.000Z',
       joinedAt: '2026-09-16T00:00:00.000Z',
       role: 'admin',
+      bio: '',
+      location: '',
     })
   })
 

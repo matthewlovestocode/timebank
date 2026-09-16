@@ -17,4 +17,8 @@ export class AuthSessions {
   remove(token: string): boolean {
     return this.usersByToken.delete(token)
   }
+
+  replace(token: string, user: User): void {
+    this.usersByToken.set(token, user)
+  }
 }

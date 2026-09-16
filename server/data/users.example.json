@@ -4,6 +4,8 @@
     "name": "Example Member",
     "email": "member@example.timebank",
     "role": "member",
+    "bio": "A helpful neighbor who enjoys making technology less intimidating.",
+    "location": "Timebank neighborhood",
     "createdAt": "2026-01-01T00:00:00.000Z",
     "updatedAt": "2026-01-01T00:00:00.000Z",
     "joinedAt": "2026-01-01T00:00:00.000Z",

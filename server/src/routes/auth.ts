@@ -8,9 +8,12 @@ import {
   DashboardResponseContract,
   DemoSignInParamsContract,
   ErrorResponseContract,
+  LedgerResponseContract,
   SignInRequestContract,
   SignInResponseContract,
   SignUpRequestContract,
+  UsersResponseContract,
+  UpdateProfileRequestContract,
 } from '../contracts/auth.js'
 import { JsonFile } from '../files/JsonFile.js'
 import { Ledger } from '../ledgers/Ledger.js'
@@ -20,7 +23,7 @@ import { LedgersFile } from '../ledgers/LedgersFile.js'
 import { User } from '../users/User.js'
 import { UsersFile } from '../users/UsersFile.js'
 
-const sessions = new AuthSessions()
+export const sessions = new AuthSessions()
 const usersFile = new UsersFile(new JsonFile(resolve(process.cwd(), 'data/users.json')))
 const ledgersFile = new LedgersFile(new JsonFile(resolve(process.cwd(), 'data/ledgers.json')))
 const ledgerEntriesFile = new LedgerEntriesFile(
@@ -126,6 +129,32 @@ export function createAuthRouter(
     return response.json(CurrentUserResponseContract.parse({ user: user.toJSON() }))
   })
 
+  router.get('/users', async (request, response) => {
+    const token = request.header('authorization')?.replace(/^Bearer\s+/i, '')
+    const user = authSessions.find(token)
+    if (!user || user.role !== 'admin') {
+      return response.status(403).json(ErrorResponseContract.parse({ error: 'Admin access is required' }))
+    }
+    const visibleUsers = (await users.all()).map(({ passwordHash: _passwordHash, ...attributes }) => attributes)
+    return response.json(UsersResponseContract.parse({ users: visibleUsers }))
+  })
+
+  router.patch('/me', async (request, response) => {
+    const token = request.header('authorization')?.replace(/^Bearer\s+/i, '')
+    const user = authSessions.find(token)
+    if (!user) {
+      return response.status(401).json(ErrorResponseContract.parse({ error: 'Authentication is required' }))
+    }
+    const result = UpdateProfileRequestContract.safeParse(request.body)
+    if (!result.success) {
+      return response.status(400).json(ErrorResponseContract.parse({ error: result.error.issues[0]?.message }))
+    }
+    const updatedUser = user.updateProfile(result.data)
+    await users.update(updatedUser)
+    authSessions.replace(token!, updatedUser)
+    return response.json(CurrentUserResponseContract.parse({ user: updatedUser.toJSON() }))
+  })
+
   router.get('/dashboard', async (request, response) => {
     const token = request.header('authorization')?.replace(/^Bearer\s+/i, '')
     const user = authSessions.find(token)
@@ -149,6 +178,16 @@ export function createAuthRouter(
         balanceMinutes: ledger.balance(entries),
       }),
     )
+  })
+
+  router.get('/ledger', async (request, response) => {
+    const token = request.header('authorization')?.replace(/^Bearer\s+/i, '')
+    const user = authSessions.find(token)
+    if (!user) return response.status(401).json(ErrorResponseContract.parse({ error: 'Authentication is required' }))
+    const ledger = await ledgers.findByUserId(user.id)
+    if (!ledger) return response.status(404).json(ErrorResponseContract.parse({ error: 'Ledger not found' }))
+    const entries = await ledgerEntries.allForLedger(ledger.id)
+    return response.json(LedgerResponseContract.parse({ balanceMinutes: ledger.balance(entries), entries }))
   })
 
   router.post('/sign-out', (request, response) => {

@@ -9,6 +9,8 @@ export const UserContract = z.object({
   updatedAt: z.iso.datetime(),
   joinedAt: z.iso.datetime(),
   role: z.enum(userRoles),
+  bio: z.string().default(''),
+  location: z.string().default(''),
 })
 
 export const SignInRequestContract = z.object({
@@ -40,9 +42,32 @@ export const CurrentUserResponseContract = z.object({
   user: UserContract,
 })
 
+export const UsersResponseContract = z.object({ users: z.array(UserContract) })
+
+export const UpdateProfileRequestContract = z.object({
+  name: z.string().trim().min(1, 'A user name is required'),
+  bio: z.string().trim().max(500, 'Bio must be 500 characters or less').default(''),
+  location: z.string().trim().max(120, 'Location must be 120 characters or less').default(''),
+})
+
 export const DashboardResponseContract = z.object({
   user: UserContract,
   balanceMinutes: z.number().int(),
+})
+
+export const LedgerResponseContract = z.object({
+  balanceMinutes: z.number().int(),
+  entries: z.array(
+    z.object({
+      id: z.uuid(),
+      ledgerId: z.uuid(),
+      direction: z.enum(['credit', 'debit']),
+      kind: z.enum(['account-creation-deposit', 'exchange-settlement']),
+      minutes: z.number().int().positive(),
+      exchangeId: z.uuid().nullable(),
+      createdAt: z.iso.datetime(),
+    }),
+  ),
 })
 
 export const ErrorResponseContract = z.object({

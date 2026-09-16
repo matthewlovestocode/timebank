@@ -8,6 +8,8 @@ export type UserAttributes = {
   updatedAt: string
   joinedAt: string
   role: UserRole
+  bio: string
+  location: string
 }
 
 export const userRoles = ['member', 'admin'] as const
@@ -17,6 +19,8 @@ export type NewUserAttributes = {
   name: string
   email: string
   role?: UserRole
+  bio?: string
+  location?: string
 }
 
 export class User {
@@ -27,6 +31,8 @@ export class User {
   readonly updatedAt: string
   readonly joinedAt: string
   readonly role: UserRole
+  readonly bio: string
+  readonly location: string
 
   constructor(attributes: UserAttributes) {
     this.id = attributes.id
@@ -36,6 +42,8 @@ export class User {
     this.updatedAt = attributes.updatedAt
     this.joinedAt = attributes.joinedAt
     this.role = attributes.role
+    this.bio = attributes.bio ?? ''
+    this.location = attributes.location ?? ''
   }
 
   static create(attributes: NewUserAttributes): User {
@@ -49,6 +57,18 @@ export class User {
       updatedAt: timestamp,
       joinedAt: timestamp,
       role: attributes.role ?? 'member',
+      bio: attributes.bio ?? '',
+      location: attributes.location ?? '',
+    })
+  }
+
+  updateProfile(profile: Pick<NewUserAttributes, 'name' | 'bio' | 'location'>): User {
+    return new User({
+      ...this.toJSON(),
+      name: profile.name,
+      bio: profile.bio ?? '',
+      location: profile.location ?? '',
+      updatedAt: new Date().toISOString(),
     })
   }
 
@@ -61,6 +81,8 @@ export class User {
       updatedAt: this.updatedAt,
       joinedAt: this.joinedAt,
       role: this.role,
+      bio: this.bio,
+      location: this.location,
     }
   }
 }
