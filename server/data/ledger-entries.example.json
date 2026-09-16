@@ -1,0 +1,10 @@
+[
+  {
+    "id": "3c231d48-6ec1-4567-b60c-843b4365c7a9",
+    "ledgerId": "7d6ecf05-864d-4be8-9958-8c3ab5c0f134",
+    "direction": "credit",
+    "kind": "account-creation-deposit",
+    "minutes": 1200,
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  }
+]

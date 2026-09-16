@@ -1,0 +1,12 @@
+[
+  {
+    "id": "d1c91af6-6ba7-46d2-a8a6-1556eaccc8e6",
+    "name": "Example Member",
+    "email": "member@example.timebank",
+    "role": "member",
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z",
+    "joinedAt": "2026-01-01T00:00:00.000Z",
+    "passwordHash": "scrypt$example-timebank-salt$5ece93f0bc7904944579684c7ab29d35ffd180f080e54f0b128194a9bad8fd601dac51b4333b72308d26a951644b16b30c4bd80e9e0c47ea93806f8e0661433d"
+  }
+]

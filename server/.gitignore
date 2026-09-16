@@ -1,0 +1,7 @@
+# Local server configuration
+.env
+.env.local
+
+# Local prototype data
+data/*.json
+!data/*.example.json
