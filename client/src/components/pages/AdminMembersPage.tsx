@@ -9,6 +9,7 @@ export function AdminMembersPage({ navigation }: { navigation: ReactNode }) {
   const members = useMembers(clientConfig.apiUrl)
   return ( 
     <PageLayout navigation={navigation}>
+      <title>Members | Admin | Timebank</title>
       <Box sx={{ p: { xs: 3, sm: 6 } }}>
         <MemberList members={members} />
       </Box>

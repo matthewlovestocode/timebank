@@ -26,6 +26,7 @@ export function ListingDetailPage({ navigation, user }: { navigation: ReactNode;
   }
   return (
     <PageLayout navigation={navigation}>
+      <title>Listing Detail | Timebank</title>
       <Box sx={{ flex: 1, p: { xs: 3, sm: 6 } }}>
         <Stack spacing={3} sx={{ maxWidth: 760 }}>
           <ActionButton variant="text" onClick={() => navigate('/dashboard')}>Back to marketplace</ActionButton>

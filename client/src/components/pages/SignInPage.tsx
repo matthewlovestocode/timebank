@@ -25,6 +25,7 @@ export function SignInPage({ authenticated, status, navigation, onSignIn }: Sign
 
   return (
     <PageLayout navigation={navigation}>
+      <title>Sign In | Timebank</title>
       <Stack
         sx={{ flex: 1, width: '100%', alignItems: 'center', justifyContent: 'center', p: 3 }}
       >

@@ -19,6 +19,7 @@ export function DashboardPage({ navigation }: DashboardPageProps) {
 
   return (
     <PageLayout navigation={navigation}>
+      <title>Dashboard | Timebank</title>
       <Box sx={{ flex: 1, p: { xs: 3, sm: 6 } }}>
         <AccountDashboard dashboard={dashboard} status={status} />
         <Box sx={{ mt: 5, width: '100%', maxWidth: 960 }}>

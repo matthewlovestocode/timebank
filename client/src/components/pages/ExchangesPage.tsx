@@ -14,6 +14,7 @@ export function ExchangesPage({ navigation }: { navigation: ReactNode }) {
   const action = async (exchangeId: string, type: 'accept' | 'complete' | 'cancel') => { const result = await act(exchangeId, type); if (result) await reload(); return result }
   return ( 
     <PageLayout navigation={navigation}>
+      <title>Exchanges | Timebank</title>
       <Box sx={{ p: { xs: 3, sm: 6 } }}>
         <ExchangeHistory exchanges={exchanges} userId={dashboard?.user.id} onAction={action} />
         {status}

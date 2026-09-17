@@ -9,6 +9,7 @@ export function LedgerPage({ navigation }: { navigation: ReactNode }) {
   const { entries } = useLedger(clientConfig.apiUrl)
   return (
     <PageLayout navigation={navigation}>
+      <title>Ledger | Timebank</title>
       <Box sx={{ p: { xs: 3, sm: 6 } }}>
         <LedgerHistory entries={entries} />
       </Box>

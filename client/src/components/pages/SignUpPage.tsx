@@ -25,6 +25,7 @@ export function SignUpPage({ authenticated, onSignUp, navigation, status }: Sign
 
   return (
     <PageLayout navigation={navigation}>
+      <title>Sign Up | Timebank</title>
       <Stack
         sx={{ flex: 1, width: '100%', alignItems: 'center', justifyContent: 'center', p: 3 }}
       >

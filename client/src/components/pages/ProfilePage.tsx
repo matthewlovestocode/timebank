@@ -14,6 +14,7 @@ type ProfilePageProps = {
 export function ProfilePage({ navigation, user, status, onSave }: ProfilePageProps) {
   return (
     <PageLayout navigation={navigation}>
+      <title>Profile | Timebank</title>
       <Box sx={{ flex: 1, p: { xs: 3, sm: 6 } }}>
         <ProfileEditor user={user} status={status} onSave={onSave} />
       </Box>

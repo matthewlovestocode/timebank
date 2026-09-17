@@ -9,6 +9,7 @@ type HomePageProps = {
 export function HomePage({ navigation }: HomePageProps) {
   return (
     <PageLayout navigation={navigation}>
+      <title>Welcome | Timebank</title>
       <WelcomePanel />
     </PageLayout>
   )
